@@ -8,16 +8,12 @@ KAFKA_TOPIC_AS_CONSUMER = 'agent_response'
 
 producer = KafkaProducer(**Config)
 
-def callback(command):
-    print(f"-> {command.value.decode('utf-8')} Delivered Succesfully!!!!")
-
 def send_commands():
     try:
         with open('commands_log.txt', 'a') as file:
             while True:
                 command = input('Give command to the agents ')
-                future = producer.send(KAFKA_TOPIC_AS_PRODUCER,value=command.encode('utf-8'))
-                future.add_callback(callback)
+                producer.send(KAFKA_TOPIC_AS_PRODUCER,value=command.encode('utf-8'))
                 print(f'-> {command} sent to {KAFKA_TOPIC_AS_PRODUCER} topic.....')
                 file.write(f"{command}\n")
     except KeyboardInterrupt:
