@@ -35,7 +35,9 @@ def start_zookeeper():
     """Start or restart Zookeeper."""
     start_or_restart_container(
         ZOOKEEPER_CONTAINER,
-        f"docker run -d --name {ZOOKEEPER_CONTAINER} --network host "
+        f"docker run -d --name {ZOOKEEPER_CONTAINER} "
+        f"--network kafka_network "   
+        f"-p 2181:2181 "   
         f"-e ALLOW_ANONYMOUS_LOGIN=yes "
         f"bitnami/zookeeper:latest"
     )
@@ -44,17 +46,21 @@ def start_kafka():
     """Start or restart Kafka with correct configurations."""
     start_or_restart_container(
         KAFKA_CONTAINER,
-        f"docker run -d --name {KAFKA_CONTAINER} --network host "
-        f"-e KAFKA_ZOOKEEPER_CONNECT=localhost:2181 "
-        f"-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 "
-        f"-e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT "
+        f"docker run -d --name {KAFKA_CONTAINER} "
+        f"--network kafka_network "   
+        f"-p 9092:9092 "   
+        f"-e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 "   
+        f"-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 "   
+        f"-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 "   
+        f"-e ALLOW_PLAINTEXT_LISTENER=yes "    
         f"bitnami/kafka:latest"
     )
+
 
 def wait_for_kafka():
     """Wait for Kafka to be ready."""
     print("[*] Waiting for Kafka to start...")
-    time.sleep(30)  # Increased wait time for stability
+    time.sleep(30)  
 
 def topic_exists(topic):
     """Check if a Kafka topic already exists using the correct path."""
