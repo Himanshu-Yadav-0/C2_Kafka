@@ -13,13 +13,16 @@ def callback(command):
 
 def send_commands():
     try:
-        while True:
-            command = input('Give command to the agents ')
-            future = producer.send(KAFKA_TOPIC_AS_PRODUCER,value=command.encode('utf-8'))
-            future.add_callback(callback)
-            print(f'-> {command} sent to {KAFKA_TOPIC_AS_PRODUCER} topic.....')
+        with open('commands_log.txt', 'a') as file:
+            while True:
+                command = input('Give command to the agents ')
+                future = producer.send(KAFKA_TOPIC_AS_PRODUCER,value=command.encode('utf-8'))
+                future.add_callback(callback)
+                print(f'-> {command} sent to {KAFKA_TOPIC_AS_PRODUCER} topic.....')
+                file.write(f"{command}\n")
     except KeyboardInterrupt:
         print('Interrupted by User')
+        file.close()
     finally:
         producer.flush()
 
