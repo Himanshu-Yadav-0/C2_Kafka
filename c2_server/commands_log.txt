@@ -4,3 +4,19 @@ ls
 pwd
 whoami
 ls
+ls
+whoami
+ls
+ls
+ls
+ls
+ls
+ls
+ls
+pwd
+whoami
+clear
+touch test.txt
+echo "Hii" > test.txt
+ls
+cat test.txt
