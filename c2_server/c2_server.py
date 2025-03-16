@@ -9,7 +9,7 @@ KAFKA_TOPIC_AS_CONSUMER = 'agent_response'
 producer = KafkaProducer(**Config)
 
 def callback(command):
-    print(f"-> {command} Delivered Succesfully!!!!")
+    print(f"-> {command.value.decode('utf-8')} Delivered Succesfully!!!!")
 
 def send_commands():
     try:
