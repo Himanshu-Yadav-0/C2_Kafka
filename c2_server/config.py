@@ -1,3 +1,3 @@
 Config = {
-    'bootstrap_servers': 'localhost:9092'
+    'bootstrap_servers': '34.131.235.21:9092'
 }

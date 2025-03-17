@@ -1,22 +1,24 @@
-ls
-ls
-ls
+whoami
 pwd
-whoami
+ls
+am start -a android.intent.action.VIEW -d "https://www.youtube.com"
+am start -a android.intent.action.VIEW -d "https://www.youtube.com/results?search_query=peshi+parmish&sp=EgIQAQ%253D%253D" 
+am start -a android.intent.action.VIEW -d "https://youtube.com/watch?v=$(curl -s 'https://www.youtube.com/results?search_query=peshi+parmish' | grep -o 'watch?v=[^"]*' | head -n1 | cut -d= -f2)"
+am start -a android.intent.action.VIEW -d "https://youtube.com/watch?v=$(curl -s 'https://www.youtube.com/results?search_query=Russian+bandana' | grep -o 'watch?v=[^"]*' | head -n1 | cut -d= -f2)"
 ls
 ls
-whoami
+am start -a android.intent.action.VIEW -d "https://youtube.com/watch?v=$(curl -s 'https://www.youtube.com/results?search_query=peshi+parmish' | grep -o 'watch?v=[^"]*' | head -n1 | cut -d= -f2)"
+am start -a android.intent.action.VIEW -d "https://youtube.com/watch?v=$(curl -s 'https://www.youtube.com/results?search_query=hanuman+chalisa' | grep -o 'watch?v=[^"]*' | head -n1 | cut -d= -f2)"
 ls
-ls
-ls
-ls
-ls
-ls
-ls
-pwd
-whoami
-clear
-touch test.txt
-echo "Hii" > test.txt
-ls
+echo "hii isha" > test.txt
 cat test.txt
+rm test.txt
+ls
+ls
+ls
+ls
+pwd
+pwd
+whoami
+touch text.py
+rm text.py

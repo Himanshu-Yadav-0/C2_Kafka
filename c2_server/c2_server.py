@@ -3,7 +3,7 @@ from kafka import KafkaProducer, KafkaConsumer
 from config import Config
 import time
 
-KAFKA_BROKER = 'localhost:9092'
+KAFKA_BROKER = '34.131.235.21:9092'
 KAFKA_TOPIC_AS_PRODUCER = 'c2_commands'
 KAFKA_TOPIC_AS_CONSUMER = 'agent_response'
 

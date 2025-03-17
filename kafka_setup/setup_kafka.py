@@ -51,7 +51,7 @@ def start_kafka():
         f"-p 9092:9092 "   
         f"-e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 "   
         f"-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 "   
-        f"-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 "   
+        f"-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://34.131.235.21:9092 "   
         f"-e ALLOW_PLAINTEXT_LISTENER=yes "    
         f"bitnami/kafka:latest"
     )

