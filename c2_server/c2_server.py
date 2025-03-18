@@ -1,3 +1,8 @@
+# this is the original backend code that works fine on terminal
+# it has no ui.
+
+# the non commented code is the same code but created the api endpoints using flask
+
 # import threading
 # from kafka import KafkaProducer, KafkaConsumer
 # from config import Config
