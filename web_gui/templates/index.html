@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C2 Server UI</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #ff3333;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+        h2, h3 {
+            color: #ff0000;
+        }
+        input, button {
+            background-color: #222;
+            color: #ff3333;
+            border: 1px solid #ff0000;
+            padding: 10px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #ff0000;
+            color: #fff;
+        }
+        pre {
+            background-color: #000;
+            color: #33ff33;
+            padding: 15px;
+            border: 2px solid #ff0000;
+            text-align: left;
+            width: 80%;
+            margin: auto;
+            overflow: auto;
+            height: 200px;
+        }
+        #responseBox{
+            background-color: transparent;
+            border: none;
+            height: 50px;
+        }
+    </style>
+    <script>
+        async function sendCommand() {
+            let commandInput = document.getElementById("commandInput");
+            let responseBox = document.getElementById("responseBox");
+            let command = commandInput.value.trim();
+            if (!command) return;
+
+            let response = await fetch("/send_command", {
+                method: "POST",
+                body: new URLSearchParams({command}),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            });
+
+            let data = await response.json();
+            responseBox.innerText = data.message || data.error;
+            commandInput.value = ""; // Clear input after sending
+        }
+
+        async function fetchResponses() {
+            let response = await fetch("/get_responses");
+            let data = await response.json();
+            document.getElementById("agentResponses").innerText = data.responses.join("\n");
+        }
+
+        async function clearResponses() {
+            await fetch("/clear_responses", { method: "POST" });
+            document.getElementById("agentResponses").innerText = "";
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("commandInput").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    sendCommand();
+                }
+            });
+        });
+
+        setInterval(fetchResponses, 3000);
+    </script>
+</head>
+<body>
+    <h2>C2 Server Control Panel</h2>
+    <input type="text" id="commandInput" placeholder="Enter command">
+    <button onclick="sendCommand()">Send</button>
+    <button onclick="clearResponses()">Clear Responses</button>
+    <pre id="responseBox"></pre>
+    <h3>Agent Responses</h3>
+    <pre id="agentResponses"></pre>
+</body>
+</html>
