@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-C2_SERVER_URL = "http://34.131.216.11:5001"  # URL of c2_server API
+C2_SERVER_URL = "http://<YOUR IP: LOCAL OR EXTERNAL IP OF CLOUD VM>:5001"  # URL of c2_server API
 
 @app.route('/')
 def home():

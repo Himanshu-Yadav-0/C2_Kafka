@@ -8,7 +8,7 @@
 # from config import Config
 # import time
 
-# KAFKA_BROKER = '34.131.235.21:9092'
+# KAFKA_BROKER = '<YOUR IP: LOCAL OR EXTERNAL IP OF CLOUD VM>:9092'
 # KAFKA_TOPIC_AS_PRODUCER = 'c2_commands'
 # KAFKA_TOPIC_AS_CONSUMER = 'agent_response'
 
@@ -50,7 +50,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-KAFKA_BROKER = '34.131.235.21:9092'
+KAFKA_BROKER = '<YOUR IP: LOCAL OR EXTERNAL IP OF CLOUD VM>:9092'
 KAFKA_TOPIC_AS_PRODUCER = 'c2_commands'
 KAFKA_TOPIC_AS_CONSUMER = 'agent_response'
 
